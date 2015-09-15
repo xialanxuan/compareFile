@@ -32,7 +32,7 @@ for str1, str2 in zip(fa, fb):
     col = cmpstr(str1,str2)
     # if equals, col = 0
     if col == 0 :
-        row += 1
+        row += 1 
         continue
     else:
         break
