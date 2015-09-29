@@ -27,4 +27,9 @@ for origfn in DictOrig:
 			
 
 for origfn in DictOrig:
-	print (origfn, ":" , DictOrig["%s" %origfn])
+	openfile = 'D:/work/diff_'+origfn
+	cur_file = open(openfile, 'w')
+	cur_diff = DictOrig["%s" %origfn]
+	cur_file.write(str(cur_diff))
+	cur_file.close()
+	print (cur_diff)
