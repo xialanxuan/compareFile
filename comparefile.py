@@ -9,7 +9,7 @@ DictTest = {}
 
 if(len(Filenames)>0):
 	for fn in Filenames:
-		if "TEST_" in fn:
+		if "Test_" in fn:
 			DictTest["%s" %fn] = ''
 		else:
 			DictOrig["%s" %fn] = ''
@@ -17,19 +17,23 @@ if(len(Filenames)>0):
 			
 			
 for origfn in DictOrig:
-	TEST_origfn = "TEST_" + origfn
+	index = origfn.find('_', 0) +1
+	TEST_origfn = origfn[0:index] + "Test_" + origfn[index:]
 	if TEST_origfn in DictTest:
-		result = os.system('diff %s %s' %(Path+origfn, Path+TEST_origfn));
-		DictOrig["%s" %origfn] = result
+		origHead = []
+		origf = open(Path+origfn)
+		head = origf.readline()
+		origHead = head.split(',')
+		for line in origf.readlines()
+			
+		
+#		print(origHead)
+	
+	
+#		result = os.popen('diff -w -u %s %s' %(Path+Dash+origfn, Path+Dash+TEST_origfn))
+		
+#		cur_file = open(openfile, 'w')
+#		cur_file.write(result.read())
+#		cur_file.close()
 	else:
 		DictOrig["%s" %origfn] = "error"
-			
-			
-
-for origfn in DictOrig:
-	openfile = 'D:/work/diff_'+origfn
-	cur_file = open(openfile, 'w')
-	cur_diff = DictOrig["%s" %origfn]
-	cur_file.write(str(cur_diff))
-	cur_file.close()
-	print (cur_diff)
