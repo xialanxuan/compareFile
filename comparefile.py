@@ -44,7 +44,7 @@ for origfn in DictOrig:
 		origlen = len(origArray)
 		TEST_origlen = len(TEST_origArray)
 		writePath = 'D:/work/diff_result/'+origfn
-				
+		writeFile = open(writePath, 'w+')		
 		
 		
 		if(origlen == TEST_origlen):
@@ -57,13 +57,13 @@ for origfn in DictOrig:
 							if (origArray[i][j] == ' ' or TEST_origArray[i][j] == ' '):
 								pass
 							else:
-								writeFile = open(writePath, 'w+')
+								
 								writeFile.write('%d line %d column, head name: %s \n orig: %s, test: %s \n ' %(i, j, origHead[j],origArray[i][j], TEST_origArray[i][j]))							
-								#writeFile.write('\n')
+								writeFile.write('\n')
 				else:
 					if (len(origArray[i]) > len(TEST_origArray[i])):
 						diffElement =  list(set(origArray[i]).difference(set(TEST_origArray[i])))
-						writeFile = open(writePath, 'w+')
+						#writeFile = open(writePath, 'w+')
 						writeFile.write('%d missing element in test %s' %(i,diffElement))
 						writeFile.write('head %s' %(origHead))
 						writeFile.write('origin %s' %(origArray[i]))
@@ -71,14 +71,14 @@ for origfn in DictOrig:
 						writeFile.write('\n')
 					else: 
 						diffElement =  list(set(TEST_origArray[i]).difference(set(origArray[i])))
-						writeFile = open(writePath, 'w+')
+						#writeFile = open(writePath, 'w+')
 						writeFile.write('%d missing element in orign %s' %(i,diffElement))
 						writeFile.write('head %s' %(origHead))
 						writeFile.write('origin %s' %(origArray[i]))
 						writeFile.write('test %s' %(TEST_origArray[i]))							
 						writeFile.write('\n')
 		else:
-			writeFile = open(writePath, 'w+')
+			#writeFile = open(writePath, 'w+')
 			writeFile.write('missing lines %d - %d' %(TEST_origlen, origlen))
 			writeFile.write('\n')
 		
