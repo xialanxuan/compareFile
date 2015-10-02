@@ -49,8 +49,8 @@ for origfn in DictOrig:
 		
 		if(origlen == TEST_origlen):
 			for i in range(0, origlen):
-				if (len(origArray[i]) == len(TEST_origArray[i])):
-					for j in range (0, len(origArray[i])):
+				if (len(origArray[i]) == len(TEST_origArray[i]) and len(origArray[i]) == len(origHead)):
+					for j in range (0, len(origHead)):
 						if (origArray[i][j] == TEST_origArray[i][j]):
 							pass
 						else:
@@ -58,27 +58,23 @@ for origfn in DictOrig:
 								pass
 							else:
 								
-								writeFile.write('%d line %d column, head name: %s \n orig: %s, test: %s \n ' %(i, j, origHead[j],origArray[i][j], TEST_origArray[i][j]))							
+								writeFile.write('%d line %d column, head name: %s \n' %(i, j, origHead[j]))							
+								writeFile.write('orig: %s\n' %origArray[i][j])
+								writeFile.write('test: %s\n' %TEST_origArray[i][j])
 								writeFile.write('\n')
 				else:
 					if (len(origArray[i]) > len(TEST_origArray[i])):
 						diffElement =  list(set(origArray[i]).difference(set(TEST_origArray[i])))
-						#writeFile = open(writePath, 'w+')
-						writeFile.write('%d missing element in test %s' %(i,diffElement))
-						writeFile.write('head %s' %(origHead))
-						writeFile.write('origin %s' %(origArray[i]))
-						writeFile.write('test %s' %(TEST_origArray[i]))							
-						writeFile.write('\n')
+
 					else: 
 						diffElement =  list(set(TEST_origArray[i]).difference(set(origArray[i])))
-						#writeFile = open(writePath, 'w+')
-						writeFile.write('%d missing element in orign %s' %(i,diffElement))
-						writeFile.write('head %s' %(origHead))
-						writeFile.write('origin %s' %(origArray[i]))
-						writeFile.write('test %s' %(TEST_origArray[i]))							
-						writeFile.write('\n')
+						
+					writeFile.write('%d missing element in orign %s' %(i,diffElement))
+					writeFile.write('head %s' %(origHead))
+					writeFile.write('origin %s' %(origArray[i]))
+					writeFile.write('test %s' %(TEST_origArray[i]))							
+					writeFile.write('\n')
 		else:
-			#writeFile = open(writePath, 'w+')
 			writeFile.write('missing lines %d - %d' %(TEST_origlen, origlen))
 			writeFile.write('\n')
 		
