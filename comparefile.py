@@ -22,14 +22,24 @@ for origfn in DictOrig:
 	if TEST_origfn in DictTest:
 		origHead = []
 		origf = open(Path+origfn)
-		head = origf.readline()
+		head = origf.readline().strip('\n')
 		origHead = head.split(',')
-		for line in origf.readlines()
-			
+		origArray =[[]]
+		TEST_origArray = [[]]
+		for line in origf.readlines():
+			origCurLine = line.strip('\n').strip(' ').split(',')
+			origArray.append(origCurLine)
+
+
+		TEST_origf = open(Path+TEST_origfn)
+		TEST_origArray =[[]]
+		TEST_origArray = [[]]
+		for TEST_line in TEST_origf.readlines():
+			TEST_origCurLine = TEST_line.strip('\n').strip(' ').split(',')
+			TEST_origArray.append(TEST_origCurLine)			
 		
 #		print(origHead)
-	
-	
+#		print(origArray)
 #		result = os.popen('diff -w -u %s %s' %(Path+Dash+origfn, Path+Dash+TEST_origfn))
 		
 #		cur_file = open(openfile, 'w')
