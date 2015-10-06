@@ -2,7 +2,7 @@ import string
 import os
 
 
-Path = 'D:/work/diff/'
+Path = 'D:/work/1002data/'
 Filenames = os.listdir(Path)
 DictOrig = {}
 DictTest = {}
@@ -22,9 +22,9 @@ for origfn in DictOrig:
 	if TEST_origfn in DictTest:
 		origHead = []
 		origf = open(Path+origfn)
-		head = origf.readline().strip('\n')
-		origf.readline()
-		origHead = head.split(',')
+		head = origf.readline()
+		sechead = origf.readline().strip('\n')
+		origHead = sechead.split(',')
 		origArray =[[]]
 		TEST_origArray = [[]]
 		for line in origf.readlines():
@@ -36,7 +36,7 @@ for origfn in DictOrig:
 		TEST_head = TEST_origf.readline()
 		TEST_origArray =[[]]
 		TEST_origArray = [[]]
-		TEST_origf.readline()
+		TEST_sechead = TEST_origf.readline().strip('\n')
 		for TEST_line in TEST_origf.readlines():
 			TEST_origCurLine = TEST_line.strip('\n').strip(' ').split(',')
 			TEST_origArray.append(TEST_origCurLine)			
@@ -58,22 +58,26 @@ for origfn in DictOrig:
 								pass
 							else:
 								
-								writeFile.write('%d line %d column, head name: %s \n' %(i, j, origHead[j]))							
+								writeFile.write('%d line: %d column, head name: %s \n' %(i+2, j, origHead[j]))							
 								writeFile.write('orig: %s\n' %origArray[i][j])
 								writeFile.write('test: %s\n' %TEST_origArray[i][j])
 								writeFile.write('\n')
 				else:
 					if (len(origArray[i]) > len(TEST_origArray[i])):
 						diffElement =  list(set(origArray[i]).difference(set(TEST_origArray[i])))
-
+						writeFile.write('%d line: missing element in orign %s \n' %(i+2,diffElement))
+						#writeFile.write('head %s' %(origHead))
+						writeFile.write('origin %s\n' %(origArray[i]))
+						writeFile.write('intest %s\n' %(TEST_origArray[i]))							
+						writeFile.write('\n\n')
 					else: 
 						diffElement =  list(set(TEST_origArray[i]).difference(set(origArray[i])))
 						
-					writeFile.write('%d missing element in orign %s' %(i,diffElement))
-					writeFile.write('head %s' %(origHead))
-					writeFile.write('origin %s' %(origArray[i]))
-					writeFile.write('test %s' %(TEST_origArray[i]))							
-					writeFile.write('\n')
+						writeFile.write('%d line: missing element in orign %s\n' %(i+2,diffElement))
+						#writeFile.write('head %s' %(origHead))
+						writeFile.write('origin %s\n' %(origArray[i]))
+						writeFile.write('intest %s\n' %(TEST_origArray[i]))							
+						writeFile.write('\n\n')
 		else:
 			writeFile.write('missing lines %d - %d' %(TEST_origlen, origlen))
 			writeFile.write('\n')
